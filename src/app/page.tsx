@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import CategoryList from "../components/home/CategoryList";
 import RangeSelect from "../components/home/RangeSelect";
 import SelectRating from "../components/home/SelectRating";
+import GoogleMapView from "../components/home/GoogleMapView";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -25,7 +26,9 @@ export default function Home() {
         <RangeSelect />
         <SelectRating />
       </div>
-      <div className="bg-blue-300 col-span-3 ">Second</div>
+      <div className="bg-blue-300 col-span-3 ">
+        <GoogleMapView />
+      </div>
     </div>
   );
 }
