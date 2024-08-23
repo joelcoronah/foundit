@@ -2,11 +2,19 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 function HeaderNavBar() {
   const { data: session } = useSession();
+  useEffect(() => {
+    getUserLocation();
+  }, []);
 
+  const getUserLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
+    });
+  };
   return (
     <div className="flex items-center justify-between p-4">
       <div className="flex gap-7 items-center ">

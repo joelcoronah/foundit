@@ -20,11 +20,13 @@ function GoogleMapView() {
         language="en"
         region="EN"
         version="weekly"
+        mapIds={[process.env.MAP_ID ?? ""]}
       >
         <GoogleMap
           id="marker-example"
           mapContainerStyle={mapContainerStyle}
           center={coordinates}
+          options={{ mapId: process.env.MAP_ID ?? "" }}
           zoom={10}
         />
       </LoadScript>
