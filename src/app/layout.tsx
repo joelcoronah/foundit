@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
-import Provider from "./Provider";
 import HeaderNavBar from "../components/HeaderNavBar";
-import { UserLocationContext } from "../../context/UserContextLocation";
+import { Providers } from "./Provider";
 
 const raleway = Raleway({ subsets: ["latin"] });
 
@@ -20,12 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={raleway.className}>
-        <Provider>
-          <UserLocationContext.Provider value={{ userLocation: null }}>
+        <body>
+          <Providers>
             <HeaderNavBar />
             {children}
-          </UserLocationContext.Provider>
-        </Provider>
+          </Providers>
+        </body>
       </body>
     </html>
   );

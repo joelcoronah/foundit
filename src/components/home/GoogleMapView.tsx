@@ -1,7 +1,24 @@
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
-import React from "react";
+import React, { useContext } from "react";
+import { UserLocationContext } from "../../../context/UserContextLocation";
+
+interface UserLocation {
+  userLocation: {
+    lat: number;
+    lng: number;
+  };
+  setUserLocation: React.Dispatch<
+    React.SetStateAction<{
+      lat: number;
+      lng: number;
+    }>
+  >;
+}
 
 function GoogleMapView() {
+  const { userLocation, setUserLocation } =
+    useContext<UserLocation>(UserLocationContext);
+
   const mapContainerStyle = {
     width: "100%",
     height: "70vh",
@@ -25,7 +42,7 @@ function GoogleMapView() {
         <GoogleMap
           id="marker-example"
           mapContainerStyle={mapContainerStyle}
-          center={coordinates}
+          center={userLocation}
           options={{ mapId: process.env.MAP_ID ?? "" }}
           zoom={10}
         />
