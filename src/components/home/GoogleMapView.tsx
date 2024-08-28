@@ -1,21 +1,10 @@
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 import React, { useContext } from "react";
 import { UserLocationContext } from "../../../context/UserContextLocation";
+import { UserLocation } from "../../shared/interfaces";
+import { Markers } from "./Markers";
 
-interface UserLocation {
-  userLocation: {
-    lat: number;
-    lng: number;
-  };
-  setUserLocation: React.Dispatch<
-    React.SetStateAction<{
-      lat: number;
-      lng: number;
-    }>
-  >;
-}
-
-function GoogleMapView() {
+function GoogleMapView({ businessList }: any) {
   const { userLocation, setUserLocation } =
     useContext<UserLocation>(UserLocationContext);
 
@@ -24,16 +13,11 @@ function GoogleMapView() {
     height: "70vh",
   };
 
-  const coordinates = {
-    lat: 10.212236,
-    lng: -68.008383,
-  };
-
   return (
     <div>
       <LoadScript
         id="script-loader"
-        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ""}
+        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY ?? ""}
         language="en"
         region="EN"
         version="weekly"
@@ -45,7 +29,29 @@ function GoogleMapView() {
           center={userLocation}
           options={{ mapId: process.env.MAP_ID ?? "" }}
           zoom={10}
-        />
+        >
+          <MarkerF
+            position={userLocation}
+            icon={{
+              url: "/user-location.png",
+              scaledSize: {
+                width: 40,
+                height: 40,
+                equals: () => false,
+              },
+            }}
+          ></MarkerF>
+          {businessList.map(
+            (business: any, index: number) =>
+              index <= 7 && (
+                <Markers
+                  business={business}
+                  key={business.id}
+                  userLocation={userLocation}
+                />
+              )
+          )}
+        </GoogleMap>
       </LoadScript>
     </div>
   );

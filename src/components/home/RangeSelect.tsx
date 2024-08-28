@@ -1,7 +1,11 @@
 "use client";
 import React, { use, useState } from "react";
 
-function RangeSelect() {
+function RangeSelect({
+  onRadiusChange,
+}: {
+  onRadiusChange: (radius: number) => void;
+}) {
   const [radius, setRadius] = useState(50);
 
   return (
@@ -13,7 +17,10 @@ function RangeSelect() {
         min={0}
         max={100}
         step={10}
-        onChange={(e) => setRadius(parseInt(e.target.value))}
+        onChange={(e) => {
+          setRadius(parseInt(e.target.value));
+          onRadiusChange(parseInt(e.target.value));
+        }}
         defaultValue={radius}
       />
       <label className="px-2 text-gray-500 text-[15px]">{radius} m</label>
