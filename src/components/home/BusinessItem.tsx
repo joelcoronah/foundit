@@ -12,7 +12,7 @@ function BusinessItem({
   readonly userLocation: any;
   showDirection?: boolean;
 }) {
-  const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+  const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API;
   const photo_ref = business?.photos ? business?.photos[0].photo_reference : "";
   const [distance, setDistance] = useState(0);
 

@@ -17,7 +17,7 @@ function GoogleMapView({ businessList }: any) {
     <div>
       <LoadScript
         id="script-loader"
-        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY ?? ""}
+        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API ?? ""}
         language="en"
         region="EN"
         version="weekly"
